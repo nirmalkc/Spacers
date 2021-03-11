@@ -1,0 +1,58 @@
+$spacer-size-list: (
+    xs:     4px,
+    sm:     8px,
+    nm:     16px,
+    md:     24px,
+    lg:     32px,
+    xl:     48px,
+    xxl:    64px,
+    none:   0
+);
+
+$spacer-sides: top right bottom left;
+$box-boundary-list: (
+    p: padding,
+    m: margin
+);
+
+.spacer {
+  @each $boundary, $boundary-property in $box-boundary-list {
+      &-#{$boundary} {
+          @each $current-size, $current-size-value in $spacer-size-list {
+              @each $side in $spacer-sides {
+                  @if ($side == top) { 
+                      &-t-#{$current-size} {
+                          #{$boundary-property}-#{$side}: $current-size-value !important;
+                      };
+                  }
+                  @else if ($side == right) { 
+                     &-r-#{$current-size} {
+                          #{$boundary-property}-#{$side}: $current-size-value !important;
+                      };
+                  }
+                  @else if ($side == bottom) { 
+                     &-b-#{$current-size} {
+                          #{$boundary-property}-#{$side}: $current-size-value !important;
+                      };
+                  }
+                  @else if ($side == left) { 
+                     &-l-#{$current-size} {
+                          #{$boundary-property}-#{$side}: $current-size-value !important;
+                      };
+                  }
+              }
+              &-#{$current-size} {
+                  #{$boundary-property}: $current-size-value;
+              }
+              &-y-#{$current-size} {
+                  #{$boundary-property}-top: $current-size-value;
+                  #{$boundary-property}-bottom: $current-size-value;
+              }
+              &-x-#{$current-size} {
+                  #{$boundary-property}-left: $current-size-value;
+                  #{$boundary-property}-right: $current-size-value;
+              }
+          }
+      }
+  }
+}
